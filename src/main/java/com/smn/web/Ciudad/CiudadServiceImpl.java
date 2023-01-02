@@ -42,10 +42,5 @@ public class CiudadServiceImpl implements CiudadService {
 			System.out.println("La Ciudad ya Existe !");
 		}
 	}
-
-	@Override
-	public void eliminarCiudad(Ciudad ciudad) {
-		// TODO Auto-generated method stub
-		repositorio.delete(ciudad);
-	}
+	
 }

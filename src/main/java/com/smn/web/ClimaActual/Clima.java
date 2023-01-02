@@ -14,6 +14,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * CLASE PERSISTENTE 
+ */
+
 @Entity
 @Table(name = "clima")
 public class Clima {
@@ -51,8 +55,6 @@ public class Clima {
 		this.ciudad = ciudad;
 		this.estadoClima = estadoClima;
 	}
-
-
 
 	public Long getId() {
 		return id;

@@ -10,5 +10,7 @@ public interface ClimaService {
 	
 	void guardarClima(Clima clima);
 	
+	void actualizarClima(Clima clima);
+	
 	void eliminarClima(Clima clima);
 }

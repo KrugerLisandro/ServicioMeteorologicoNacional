@@ -25,7 +25,8 @@ public class ClimaForm {
 	@PositiveOrZero(message = "Temperatura debe estar entre 0° a 60°")
 	@Max(value = 60, message = "Temperatura debe estar entre 0° a 60°")
 	private int temperatura;
-
+	
+	@NotNull
 	private Ciudad ciudad;
 
 	@NotNull

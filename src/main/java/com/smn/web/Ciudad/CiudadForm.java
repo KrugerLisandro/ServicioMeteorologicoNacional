@@ -2,6 +2,10 @@ package com.smn.web.Ciudad;
 
 import jakarta.validation.constraints.Size;
 
+/*
+ *  LA CLASE FORM ME PERMITE GUARDAR LOS DATOS EN MI APLICACION WEB
+ */
+
 public class CiudadForm {
 
 	private Long id;

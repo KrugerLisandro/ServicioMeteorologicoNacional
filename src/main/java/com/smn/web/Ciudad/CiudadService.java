@@ -10,5 +10,4 @@ public interface CiudadService {
 	
 	void guardarCiudad(Ciudad ciudad);
 	
-	void eliminarCiudad(Ciudad ciudad);
 }

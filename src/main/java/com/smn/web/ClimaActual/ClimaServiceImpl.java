@@ -26,6 +26,28 @@ public class ClimaServiceImpl implements ClimaService{
 	@Override
 	public void guardarClima(Clima clima) {
 		// TODO Auto-generated method stub
+		Boolean aux = false;
+		List<Clima> climas = this.listarClimas();
+		
+		for (Clima c : climas) {
+			if(c.getFecha().isEqual(clima.getFecha()) 
+				&& c.getCiudad().getNombre().equals(clima.getCiudad().getNombre())) {
+				aux = true;
+			}
+		}
+		
+		if(aux == false) {
+			repositorio.save(clima);
+			System.out.println("SAVE !");
+		}else {
+			System.out.println("El Clima ya Existe !");
+		}
+		
+	}
+	
+	@Override
+	public void actualizarClima(Clima clima) {
+		// TODO Auto-generated method stub
 		repositorio.save(clima);
 	}
 
@@ -34,5 +56,7 @@ public class ClimaServiceImpl implements ClimaService{
 		// TODO Auto-generated method stub
 		repositorio.delete(clima);
 	}
+
+	
 
 }

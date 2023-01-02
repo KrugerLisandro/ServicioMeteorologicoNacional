@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * CLASE PERSISTENTE 
+ */
+
 @Entity
 @Table(name = "estado_clima")
 public class EstadoClima {

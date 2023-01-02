@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.smn.web.ClimaActual.ClimaForm;
-
 import jakarta.validation.Valid;
 
 @Controller
@@ -18,6 +16,7 @@ public class CiudadController {
 	@Autowired
 	private CiudadServiceImpl servicioCiudad;
 	
+	//METODO QUE ME DEVUELVE EL FORMULARIO PARA AGREGAR UNA NUEVA CIUDAD
 	@GetMapping("/ciudad/nuevo")
 	public String mostrarFomularioCiudad(Model modelo) {
 		CiudadForm ciudadForm = new CiudadForm();
@@ -25,6 +24,7 @@ public class CiudadController {
 		return "crear_ciudad";
 	}
 	
+	//METODO QUE ME PERMITE GUARDAR UNA NUEVA CIUDAD
 	@PostMapping("/ciudad/agregar")
 	public String guardarCiudad(@Valid @ModelAttribute("ciudadForm") CiudadForm ciudadForm, BindingResult result, Model modelo) {
 
