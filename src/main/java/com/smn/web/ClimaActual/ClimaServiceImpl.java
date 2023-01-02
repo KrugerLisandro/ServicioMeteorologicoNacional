@@ -38,7 +38,7 @@ public class ClimaServiceImpl implements ClimaService{
 		
 		if(aux == false) {
 			repositorio.save(clima);
-			System.out.println("SAVE !");
+
 		}else {
 			System.out.println("El Clima ya Existe !");
 		}
