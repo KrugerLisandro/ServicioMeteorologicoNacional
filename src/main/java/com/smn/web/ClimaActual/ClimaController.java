@@ -30,27 +30,15 @@ public class ClimaController {
 
 	@Autowired
 	private EstadoClimaServiceImpl servicioEstadoClima;
-	
-	//ME PERMITE DEVOLVER LA LISTA DE LOS CLIMAS GUARDADOS
-	@GetMapping({"/", "/consultar_clima"})
+
+	// ME PERMITE DEVOLVER LA LISTA DE LOS CLIMAS GUARDADOS
+	@GetMapping("/consultar_clima")
 	public String listado_clima(Model modelo) {
 		modelo.addAttribute("listado_clima", servicioClima.listarClimas());
 		return "consultar_clima";
 	}
-	
-	//LISTA DE CIUDADES REGISTRADAS
-	@ModelAttribute("allCiudades")
-	public List<Ciudad> getAllCiudades() {
-		return this.servicioCiudad.listarCiudades();
-	}
-	
-	//LISTA DE ESTADOS DEL CLIMA REGISTRADOS
-	@ModelAttribute("allEstadoClimas")
-	public List<EstadoClima> getAllEstadoClimas() {
-		return this.servicioEstadoClima.listarEstadosClima();
-	}
-	
-	//ME DEVUELVE EL FORMULARIO PARA REGISTRAR UN CLIMA
+
+	// ME DEVUELVE EL FORMULARIO PARA REGISTRAR UN CLIMA
 	@GetMapping("/clima/nuevo")
 	public String mostrarFomularioClima(Model modelo) {
 		ClimaForm climaForm = new ClimaForm();
@@ -58,17 +46,17 @@ public class ClimaController {
 		return "crear_clima";
 	}
 
-	//GUARDAR LOS DATOS DEL FORMULARIO DEL CLIMA
+	// GUARDAR LOS DATOS DEL FORMULARIO DEL CLIMA
 	@PostMapping("/clima/agregar")
 	public String guardarCiudad(@Valid @ModelAttribute("climaForm") ClimaForm climaForm, BindingResult result,
 			Model modelo) {
-		
+
 		if (result.hasErrors()) {
 			modelo.addAttribute("climaForm", climaForm);
 			System.out.println("Hubo errores");
 			return "crear_clima";
-		} 
-		
+		}
+
 		try {
 			Clima clima = climaForm.toModel();
 			servicioClima.guardarClima(clima);
@@ -79,15 +67,15 @@ public class ClimaController {
 		}
 		return "redirect:/";
 	}
-	
-	//DEVULVE EL FORMULARIO PARA EDITAR UN CLIMA
+
+	// DEVULVE EL FORMULARIO PARA EDITAR UN CLIMA
 	@GetMapping("/consultar_clima/editar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
 		modelo.addAttribute("climaForm", servicioClima.obtenerClimaId(id));
 		return "editar_clima";
 	}
-	
-	//GUARDAR LOS DATOS EDITADOS DEL CLIMA
+
+	// GUARDAR LOS DATOS EDITADOS DEL CLIMA
 	@PostMapping("/consultar_clima/{id}")
 	public String actualizarClima(@PathVariable Long id, @Valid @ModelAttribute("climaForm") ClimaForm climaForm,
 			BindingResult result, Model modelo) {
@@ -104,7 +92,7 @@ public class ClimaController {
 			climaExistente.setTemperatura(climaForm.getTemperatura());
 			climaExistente.setCiudad(climaForm.getCiudad());
 			climaExistente.setEstadoClima(climaForm.getEstadoClima());
-			
+
 			servicioClima.actualizarClima(climaExistente);
 
 			return "redirect:/consultar_clima";
@@ -115,8 +103,8 @@ public class ClimaController {
 
 		return "redirect:/";
 	}
-	
-	//ELIMINAR UN CLIMA
+
+	// ELIMINAR UN CLIMA
 	@GetMapping("/consultar_clima/{id}")
 	public String eliminarClima(@PathVariable Long id, @ModelAttribute("clima") Clima clima, Model modelo) {
 
@@ -131,4 +119,17 @@ public class ClimaController {
 
 		return "redirect:/";
 	}
+
+	// LISTA DE CIUDADES REGISTRADAS
+	@ModelAttribute("allCiudades")
+	public List<Ciudad> getAllCiudades() {
+		return this.servicioCiudad.listarCiudades();
+	}
+
+	// LISTA DE ESTADOS DEL CLIMA REGISTRADOS
+	@ModelAttribute("allEstadoClimas")
+	public List<EstadoClima> getAllEstadoClimas() {
+		return this.servicioEstadoClima.listarEstadosClima();
+	}
+
 }
