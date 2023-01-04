@@ -73,7 +73,6 @@ public class EventoController {
 		}
 
 		Evento evento = eventoForm.toModel();
-		evento.setCiudad(servicioCiudad.obtenerCiudadId(eventoForm.getId_ciudad()));
 		servicioEvento.guardarEvento(evento);
 		System.out.println("Se envía alerta por email a las siguienes casillas:");
 		System.out.println(servicioEvento.emailPersonas(evento.getCiudad().getId()));

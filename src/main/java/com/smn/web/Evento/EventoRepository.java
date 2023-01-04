@@ -9,9 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Long> {
 	
-	// metodo que genera una lista de emails de todas las personas que esten asociadas a una ciudad.
-	@Query(value = "SELECT usu.mail FROM smn.usuariossuscriptos usu inner join smn.suscripciones sus on usu.id_usuario = sus.id_usuario where sus.id_ciudad = ?1", nativeQuery = true)
+	//METDO QUE GENERA UNA LISTA DE EMAILS DE TODAS LAS PERSONAS QUE ESTEN ASOCIADAS A UNA CIUDAD
+	@Query(value = "SELECT usu.mail FROM servicio_mn.usuario usu inner join servicio_mn.usuario_suscripcion sus on usu.id = sus.id_usuario where sus.id_ciudad = ?1", nativeQuery = true)
 	List<String> searchByCiudadQueryNative(Long id_ciudad);
-
 
 }

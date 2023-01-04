@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.smn.web.Ciudad.Ciudad;
+
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,17 +22,17 @@ public class EventoForm {
 	private String descripcion;
 	
 	@NotNull
-	private Long id_ciudad;
+	private Ciudad ciudad;
 
 	public EventoForm() {
 		super();
 	}
 
-	public EventoForm(Date fecha, String descripcion, Long id_ciudad) {
+	public EventoForm(Date fecha, String descripcion, Ciudad ciudad) {
 		super();
 		this.fecha = fecha;
 		this.descripcion = descripcion;
-		this.id_ciudad = id_ciudad;
+		this.ciudad = ciudad;
 	}	
 
 	public Long getId() {
@@ -63,19 +65,20 @@ public class EventoForm {
 	}
 
 
-	public Long getId_ciudad() {
-		return id_ciudad;
+	public Ciudad getCiudad() {
+		return ciudad;
 	}
 
 
-	public void setId_ciudad(Long id_ciudad) {
-		this.id_ciudad = id_ciudad;
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}
 
 	public Evento toModel() {
 		Evento newEvento = new Evento();
 		newEvento.setFecha(this.getFecha());
 		newEvento.setDescripcion(this.getDescripcion());
+		newEvento.setCiudad(this.getCiudad());
 		return newEvento;
 	}
 	

@@ -17,7 +17,7 @@ public interface PronosticoService {
 	
 	void eliminarPronostico(Pronostico pronostico);
 	
-	List<Pronostico> filter(PronosticoBuscarForm pronosticoBuscarForm);
+	//List<Pronostico> filter(PronosticoBuscarForm pronosticoBuscarForm);
 	
 	List<Pronostico> listarPronosticosFecha(Date fecha);
 	

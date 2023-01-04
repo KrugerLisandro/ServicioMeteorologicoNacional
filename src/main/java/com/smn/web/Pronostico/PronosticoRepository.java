@@ -12,12 +12,12 @@ import com.smn.web.Ciudad.Ciudad;
 @Repository
 public interface PronosticoRepository extends JpaRepository<Pronostico, Long> {
 
-	@Query("SELECT p FROM Pronostico p WHERE p.id_ciudad = ?1 and p.fecha  BETWEEN ?2 AND ?3")
+	@Query("SELECT p FROM Pronostico p WHERE p.ciudad = ?1 and p.fecha  BETWEEN ?2 AND ?3")
 	List<Pronostico> findByFilter(Long id, Date fechaActual, Date fechaExtendida);
 
 	@Query("SELECT p FROM Pronostico p WHERE p.fecha > ?1")
 	List<Pronostico> findByFecha(Date fecha);
 
-	@Query("SELECT p FROM Pronostico p WHERE p.id_ciudad = ?1 and p.fecha = ?2")
+	@Query("SELECT p FROM Pronostico p WHERE p.ciudad = ?1 and p.fecha = ?2")
 	Pronostico findByCiudadAndFecha(Ciudad ciudad, Date fecha);
 }

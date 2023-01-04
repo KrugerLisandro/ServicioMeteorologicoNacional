@@ -1,7 +1,3 @@
-<!--
- * @author Zarate Marcela
- *
--->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
@@ -48,14 +44,14 @@
 					</thead>
 					<tbody>
 						<tr th:each="pronostico : ${listado_pronostico}">
-							<td th:text="${pronostico.getFecha_pronostico()}">Fecha</td>
-							<td th:text="${pronostico.getProbabilidad_lluvia()}">Probabilidad Lluvia</td>
-							<td th:text="${pronostico.getCant_lluvia()}">Cant mm Lluvia</td>
-							<td th:text="${pronostico.getDsc_pronostico()}">Descripción Lluvia</td>
-							<td th:text="${pronostico.getId_ciudad().getNombre_ciudad()}">Ciudad</td>
+							<td th:text="${pronostico.getFecha()}">Fecha</td>
+							<td th:text="${pronostico.getProbabilidad()}">Probabilidad Lluvia</td>
+							<td th:text="${pronostico.getCantidad()}">Cant mm Lluvia</td>
+							<td th:text="${pronostico.getDescripcion()}">Descripción Lluvia</td>
+							<td th:text="${pronostico.getCiudad().getNombre()}">Ciudad</td>
 
 							<td>
-								<a th:href="@{/consultar_pronostico/editar/{id}(id=${pronostico.getId_pronostico()})}"
+								<a th:href="@{/consultar_pronostico/editar/{id}(id=${pronostico.getId()})}"
 									class="btn btn-info">Editar</a>
 							</td>
 

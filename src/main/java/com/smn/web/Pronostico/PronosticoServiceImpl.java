@@ -39,10 +39,10 @@ public class PronosticoServiceImpl implements PronosticoService {
 		repositorio.delete(pronostico);
 	}
 	
-	@Override
+	/*@Override
 	public List<Pronostico> filter(PronosticoBuscarForm pronosticoBuscarForm) {
 	return repositorio.findByFilter(pronosticoBuscarForm.getId(),pronosticoBuscarForm.getFechaActual(),pronosticoBuscarForm.getFechaExtendida());
-	}
+	}*/
 	
 	@Override
 	public List<Pronostico> listarPronosticosFecha(Date fecha) {

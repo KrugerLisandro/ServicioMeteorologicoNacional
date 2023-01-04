@@ -36,7 +36,7 @@ public class Pronostico {
 	@Column
 	private String descripcion;
 
-	@JoinColumn
+	@JoinColumn(name = "ciudad")
 	@ManyToOne()
 	private Ciudad ciudad;
 
