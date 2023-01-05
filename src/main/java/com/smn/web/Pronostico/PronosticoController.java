@@ -32,9 +32,11 @@ public class PronosticoController {
 	public String listado_pronostico(Model modelo) throws ParseException {
 		// modelo.addAttribute("listado_pronostico",
 		// servicioPronostico.listarPronosticos());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String fechaComoCadena = sdf.format(new Date());
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaComoCadena = formato.format(new Date());
+
 		Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fechaComoCadena);
+
 		modelo.addAttribute("listado_pronostico", servicioPronostico.listarPronosticosFecha(fecha));
 		return "consultar_pronostico";
 	}
@@ -49,27 +51,22 @@ public class PronosticoController {
 	@PostMapping("/pronostico/agregar")
 	public String guardarPronostico(@Valid PronosticoForm pronosticoForm, BindingResult result, Model modelo) {
 
-		Pronostico pronosticoExiste = servicioPronostico.obtenerPronosticoExiste(pronosticoForm.getCiudad(),
-				pronosticoForm.getFecha());
-
 		if (result.hasErrors()) {
 			modelo.addAttribute("pronosticoForm", pronosticoForm);
 			System.out.println("Hubo errores");
 			return "crear_pronostico";
 		}
 
-		if (pronosticoExiste != null) {
-			System.out.println("Pronostico repetido");
-			PronosticoForm pronosticoblanco = new PronosticoForm();
-			modelo.addAttribute("pronosticoForm", pronosticoblanco);
-			return "crear_pronostico";
-		}
-
-		else {
+		try {
 			Pronostico pronostico = pronosticoForm.toModel();
 			servicioPronostico.guardarPronostico(pronostico);
 			return "redirect:/consultar_pronostico";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+		return "redirect:/";
 	}
 
 	@GetMapping("/consultar_pronostico/editar/{id}")

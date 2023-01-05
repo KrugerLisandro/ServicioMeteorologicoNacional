@@ -17,11 +17,11 @@ public class PronosticoForm {
 	private Long id;
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@Future(message = "Fecha solo puede ser futura")
+	@Future(message = "La fecha solo puede ser futura")
 	private Date fecha;
 
 	@PositiveOrZero(message = "Probabilidad de lluvia debe estar entre 0% a 100%")
-	@Max(100)
+	@Max(value = 100, message = "Probabilidad de lluvia debe estar entre 0% a 100%" )
 	private int probabilidad;
 
 	@PositiveOrZero(message = "Cantidad de lluvia en mm debe ser 0 o superior")

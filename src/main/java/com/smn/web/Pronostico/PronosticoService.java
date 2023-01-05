@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.smn.web.Ciudad.Ciudad;
+import com.smn.web.Excepcion.Excepcion;
 
 public interface PronosticoService {
 	
@@ -11,7 +12,7 @@ public interface PronosticoService {
 	
 	Pronostico obtenerPronosticoId(Long id);
 	
-	void guardarPronostico(Pronostico pronostico);
+	void guardarPronostico(Pronostico pronostico) throws Excepcion;
 	
 	void actualizarPronostico(Pronostico pronostico);
 	
