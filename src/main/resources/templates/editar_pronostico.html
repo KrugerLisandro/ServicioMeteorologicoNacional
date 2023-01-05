@@ -40,7 +40,7 @@
 	<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
 		<h1 class="text-center">Modificar un Pronostico</h1>
 		<div class="card-body">
-			<form th:action="@{/consultar_pronostico/{id}(id=${pronosticoForm.id})}" th:object="${pronosticoForm}"
+			<form th:action="@{/consultar_pronostico/{id}(id=${pronosticoFormEditar.id})}" th:object="${pronosticoFormEditar}"
 				method="POST">
 				<input type="hidden" id="id" th:field="*{id}">
 				<div class="form-group">
@@ -48,14 +48,14 @@
 					<br>
 					<input type="text" id="fecha" name="fecha" autocomplete="off" th:field="*{fecha}"
 						placeholder="yyyy/MM/dd" />
-					<td>
+					<!--<td>
 						<p class="form text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errorclass="error"
 							th:errors="*{fecha}" />
-					</td>
+					</td>-->
 					<br>
 					<label>Probabilidad de Lluvia (%): </label>+
 					<br>
-					<input type="text" name="probabilidad" th:field="*{probabilidad}" class="form-control"
+					<input type="number" name="probabilidad" th:field="*{probabilidad}" class="form-control"
 						placeholder="probabilidad" required />
 					<td>
 						<p class="form text text-danger" th:if="${#fields.hasErrors('probabilidad')}"
@@ -63,7 +63,7 @@
 					</td>
 					<label>Cantidad en mm de lluvia: </label>
 					<br>
-					<input type="text" name="cantidad" th:field="*{cantidad}" class="form-control"
+					<input type="number" name="cantidad" th:field="*{cantidad}" class="form-control"
 						placeholder="cantidad" required />
 					<td>
 						<p class="form text text-danger" th:if="${#fields.hasErrors('cantidad')}" th:errorclass="error"

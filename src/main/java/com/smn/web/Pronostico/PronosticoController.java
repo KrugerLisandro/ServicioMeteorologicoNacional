@@ -71,38 +71,37 @@ public class PronosticoController {
 
 	@GetMapping("/consultar_pronostico/editar/{id}")
 	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
-		modelo.addAttribute("pronosticoForm", servicioPronostico.obtenerPronosticoId(id));
+		modelo.addAttribute("pronosticoFormEditar", servicioPronostico.obtenerPronosticoId(id));
 		return "editar_pronostico";
 	}
 
 	@PostMapping("/consultar_pronostico/{id}")
 	public String actualizarPronostico(@PathVariable Long id,
-			@Valid @ModelAttribute("pronosticoForm") PronosticoForm pronosticoForm, BindingResult result,
+			@Valid @ModelAttribute("pronosticoFormEditar") PronosticoFormEditar pronosticoFormEditar, BindingResult result,
 			Model modelo) {
 		Pronostico pronosticoExistente = servicioPronostico.obtenerPronosticoId(id);
 
 		if (result.hasErrors()) {
-			modelo.addAttribute("pronosticoForm", pronosticoForm);
+			modelo.addAttribute("pronosticoFormEditar", pronosticoFormEditar);
 			System.out.println("Hubo errores");
 			return "editar_pronostico";
 		}
-		Pronostico pronosticoExiste = servicioPronostico.obtenerPronosticoExiste(pronosticoForm.getCiudad(),
-				pronosticoForm.getFecha());
-		if (pronosticoExiste != null) {
-			System.out.println("Pronostico repetido");
-			modelo.addAttribute("pronosticoForm", pronosticoForm);
-			return "editar_pronostico";
-		} else {
 
-			pronosticoExistente.setFecha(pronosticoForm.getFecha());
-			pronosticoExistente.setProbabilidad(pronosticoForm.getProbabilidad());
-			pronosticoExistente.setCantidad(pronosticoForm.getCantidad());
-			pronosticoExistente.setDescripcion(pronosticoForm.getDescripcion());
-			pronosticoExistente.setCiudad(pronosticoForm.getCiudad());
+		try {
+			pronosticoExistente.setFecha(pronosticoFormEditar.getFecha());
+			pronosticoExistente.setProbabilidad(pronosticoFormEditar.getProbabilidad());
+			pronosticoExistente.setCantidad(pronosticoFormEditar.getCantidad());
+			pronosticoExistente.setDescripcion(pronosticoFormEditar.getDescripcion());
+			pronosticoExistente.setCiudad(pronosticoFormEditar.getCiudad());
 			servicioPronostico.actualizarPronostico(pronosticoExistente);
 
 			return "redirect:/consultar_pronostico";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		return "redirect:/";
 	}
 
 	@ModelAttribute("allCiudades")
