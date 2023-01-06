@@ -1,4 +1,4 @@
-# ServicioMeteorologicoNacional
+# Servicio Meteorologico Nacional
 Descripción del problema:
 El servicio meteorológico nacional desea implementar un sistema informático que provea
 información del clima, la cual estará disponible para ser consultada en la web
