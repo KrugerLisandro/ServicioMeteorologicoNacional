@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.smn.web.Ciudad.Ciudad;
-import com.smn.web.Ciudad.CiudadForm;
 import com.smn.web.Ciudad.CiudadServiceImpl;
 import com.smn.web.EstadoClima.EstadoClima;
 import com.smn.web.EstadoClima.EstadoClimaServiceImpl;
+import com.smn.web.Excepcion.Excepcion;
 
 import jakarta.validation.Valid;
 
@@ -70,7 +70,7 @@ public class ClimaController {
 
 	// DEVULVE EL FORMULARIO PARA EDITAR UN CLIMA
 	@GetMapping("/consultar_clima/editar/{id}")
-	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
+	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) throws Excepcion {
 		modelo.addAttribute("climaForm", servicioClima.obtenerClimaId(id));
 		return "editar_clima";
 	}
@@ -78,7 +78,7 @@ public class ClimaController {
 	// GUARDAR LOS DATOS EDITADOS DEL CLIMA
 	@PostMapping("/consultar_clima/{id}")
 	public String actualizarClima(@PathVariable Long id, @Valid @ModelAttribute("climaForm") ClimaForm climaForm,
-			BindingResult result, Model modelo) {
+			BindingResult result, Model modelo) throws Excepcion {
 		Clima climaExistente = servicioClima.obtenerClimaId(id);
 
 		if (result.hasErrors()) {

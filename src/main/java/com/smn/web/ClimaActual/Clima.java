@@ -104,10 +104,4 @@ public class Clima {
 		this.humedad = humedad;
 	}
 
-	@Override
-	public String toString() {
-		return "Clima [id=" + id + ", fecha=" + fecha + ", temperatura=" + temperatura + ", humedad=" + humedad
-				+ ", ciudad=" + ciudad + ", estadoClima=" + estadoClima + "]";
-	}
-
 }

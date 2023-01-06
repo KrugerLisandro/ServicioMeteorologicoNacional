@@ -17,12 +17,19 @@ public class PronosticoServiceImpl implements PronosticoService {
 
 	@Override
 	public List<Pronostico> listarPronosticos() {
-		return repositorio.findAll();
+		
+		return this.repositorio.findAll();
 	}
 
 	@Override
-	public Pronostico obtenerPronosticoId(Long id) {
-		return repositorio.findById(id).get();
+	public Pronostico obtenerPronosticoId(Long id) throws Excepcion{
+		
+		Pronostico obtenerPronostico = this.repositorio.findById(id).get();
+		
+		if(obtenerPronostico == null) {
+			throw new Excepcion("No se pudo obtener el Pronostico");
+		}
+		return obtenerPronostico;
 	}
 
 	@Override

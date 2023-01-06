@@ -2,7 +2,7 @@ package com.smn.web.Evento;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,23 +45,6 @@ public class EventoController {
 	@PostMapping("/evento/agregar")
 	public String guardarEvento(@Valid @ModelAttribute("evento") EventoForm eventoForm, BindingResult result,
 			Model modelo) {
-		// servicioEvento.guardarEvento(evento);
-
-		Calendar today = Calendar.getInstance();
-		today.add(Calendar.DATE, -1);
-
-		Calendar hoy = Calendar.getInstance();
-		hoy.add(Calendar.DATE, 1);
-
-		Date mañana = hoy.getTime();
-		Date todayDate = today.getTime();
-
-		// VALIDAMOS QUE LA FECHA NO SEA MAYOR A MAÑANA
-		if (eventoForm.getFecha().after(mañana) || eventoForm.getFecha().before(todayDate)) {
-			FieldError error = new FieldError("evento", "fechaevento",
-					"**La fecha debe ser del día de la fecha o el siguiente.");
-			result.addError(error);
-		}
 
 		if (result.hasErrors()) {
 			modelo.addAttribute("evento", eventoForm);
@@ -72,35 +54,34 @@ public class EventoController {
 			return "crear_evento";
 		}
 
-		Evento evento = eventoForm.toModel();
-		servicioEvento.guardarEvento(evento);
-		System.out.println("Se envía alerta por email a las siguienes casillas:");
-		System.out.println(servicioEvento.emailPersonas(evento.getCiudad().getId()));
+		try {
+			Evento evento = eventoForm.toModel();
+			servicioEvento.guardarEvento(evento);
+			System.out.println("Se envía alerta por email a las siguienes casillas:");
+			System.out.println(servicioEvento.emailPersonas(evento.getCiudad().getId()));
 
-		return "redirect:/consultar_evento";
+			return "redirect:/consultar_evento";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	}
+		return "redirect:/";
 
-	@GetMapping("/consultar_evento/editar/{id}")
-	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
-		modelo.addAttribute("evento", servicioEvento.obtenerEventoId(id));
-		return "editar_evento";
-	}
-
-	@PostMapping("/consultar_evento/{id}")
-	public String actualizarevento(@PathVariable Long id, @ModelAttribute("evento") Evento evento, Model modelo) {
-		Evento eventoExistente = servicioEvento.obtenerEventoId(id);
-		eventoExistente.setFecha(evento.getFecha());
-		eventoExistente.setDescripcion(evento.getDescripcion());
-		eventoExistente.setCiudad(evento.getCiudad());
-		return "redirect:/consultar_evento";
 	}
 
 	@GetMapping("/consultar_evento/{id}")
 	public String eliminarEvento(@PathVariable Long id, @ModelAttribute("evento") Evento evento, Model modelo) {
-		Evento eventoExistente = servicioEvento.obtenerEventoId(id);
-		servicioEvento.eliminarEvento(eventoExistente);
-		return "redirect:/consultar_evento";
+		try {
+			Evento eventoExistente = servicioEvento.obtenerEventoId(id);
+			servicioEvento.eliminarEvento(eventoExistente);
+			return "redirect:/consultar_evento";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "redirect:/";
 	}
 
 	public static LocalDateTime convertToLocalDateTimeViaInstant(Date dateToConvert) {

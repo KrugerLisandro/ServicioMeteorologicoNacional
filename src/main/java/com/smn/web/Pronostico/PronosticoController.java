@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.smn.web.Ciudad.Ciudad;
 import com.smn.web.Ciudad.CiudadServiceImpl;
+import com.smn.web.Excepcion.Excepcion;
 
 import jakarta.validation.Valid;
 
@@ -70,7 +71,7 @@ public class PronosticoController {
 	}
 
 	@GetMapping("/consultar_pronostico/editar/{id}")
-	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
+	public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) throws Excepcion {
 		modelo.addAttribute("pronosticoFormEditar", servicioPronostico.obtenerPronosticoId(id));
 		return "editar_pronostico";
 	}
@@ -78,7 +79,7 @@ public class PronosticoController {
 	@PostMapping("/consultar_pronostico/{id}")
 	public String actualizarPronostico(@PathVariable Long id,
 			@Valid @ModelAttribute("pronosticoFormEditar") PronosticoFormEditar pronosticoFormEditar, BindingResult result,
-			Model modelo) {
+			Model modelo) throws Excepcion {
 		Pronostico pronosticoExistente = servicioPronostico.obtenerPronosticoId(id);
 
 		if (result.hasErrors()) {

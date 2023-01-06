@@ -10,7 +10,7 @@ public interface PronosticoService {
 	
 	List<Pronostico> listarPronosticos();
 	
-	Pronostico obtenerPronosticoId(Long id);
+	Pronostico obtenerPronosticoId(Long id) throws Excepcion;
 	
 	void guardarPronostico(Pronostico pronostico) throws Excepcion;
 	

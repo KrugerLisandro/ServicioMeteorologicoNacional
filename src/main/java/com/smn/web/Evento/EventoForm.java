@@ -6,15 +6,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.smn.web.Ciudad.Ciudad;
 
-import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 public class EventoForm {
 	
 	private Long id;
-
-	//@FutureOrPresent(message = "VALIDACION Fecha solo puede ser el presente o futuro")
+	
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	//@FutureOrPresent(message = "La Fecha solo puede ser el Presente o Futuro")
 	private Date fecha;
 		
 	@Size(min=2, max=500, message = "La descripción debe tener entre 2 y 500 caracteres")
